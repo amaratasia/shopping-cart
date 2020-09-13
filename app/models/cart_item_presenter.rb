@@ -4,8 +4,9 @@ class CartItemPresenter
   end
 
   def items
-    @result ||= @cart.cart_items.includes(:product).map do |item|
-                  { name: item.product.name, qty: item.qty, price: item.product.price }
-                end
+    @result ||= @cart.cart_items.joins(:product).select('qty * price as "total", name').as_json(only: %i[total name])
+  end
+  def total
+
   end
 end
