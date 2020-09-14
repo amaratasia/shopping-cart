@@ -37,7 +37,7 @@ class CartPresenter
   private
 
   def cart_discount
-    @cart_discounts ||= PromotionCategory.cart_logic.where('JSON_EXTRACT(rules, "$.min_val") >= ?', total)
+    @cart_discounts ||= PromotionCategory.cart_logic.where('JSON_EXTRACT(rules, "$.min_val") <= ?', @total)
                                                     .select("IFNULL(max(JSON_EXTRACT(rules, '$.discount')), 0) discount_val")[0]
                                                     .discount_val
   end
