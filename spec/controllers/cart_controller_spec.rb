@@ -12,7 +12,7 @@ RSpec.describe CartController, type: :controller do
       is_expected.to have_http_status(:ok)
       body = JSON.parse response.body
 
-      expect(body['data'][0]['total']).to eq(cart_item.product.price * cart_item.qty)
+      expect(body['data'][0]['total'].to_f).to eq(cart_item.product.price * cart_item.qty)
     end
   end
 

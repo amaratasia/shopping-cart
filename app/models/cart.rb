@@ -7,6 +7,13 @@ class Cart < ApplicationRecord
   end
 
   def add_item(add_to_cart_params)
-    cart_items.create(add_to_cart_params)
+    item = cart_items.where(product_id: add_to_cart_params[:product_id])
+    if item.exists?
+      item = item.qty + add_to_cart_params[:qty]
+      item.save
+    else
+      cart_items.create(add_to_cart_params)
+    end
   end
+
 end

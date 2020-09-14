@@ -1,7 +1,7 @@
 class CartController < ApplicationController
 
   def items
-    items = CartItemPresenter.new(cart).items
+    items = CartPresenter.new(cart).items
     render_json items
   end
 
